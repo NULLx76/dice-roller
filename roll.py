@@ -39,12 +39,16 @@ def roll_dice(args_list):
     else:
         sides = int(args[1])
         operation = 0
+    
+    if sides <=1:
+        print("Sides of the die must be greater than 1")
+        sys.exit(2)
 
     # rolling the dice and keeping track of the rolls
     roll = 0
     rolls = []
     for n in range(times):
-        t_roll = random.randrange(1, sides)
+        t_roll = random.randrange(1, sides+1)
         roll += t_roll
         rolls.append(t_roll)
 
@@ -54,6 +58,9 @@ def roll_dice(args_list):
     # Returns total and individual rolls
     return output, rolls
 
+if len(sys.argv) is 1:
+    print('Syntax is: roll <dice_code>')
+    sys.exit(2)
 
 rolling = roll_dice(sys.argv[1:])
 print("Total: " + str(rolling[0]) + "\nRolls: " + str(rolling[1]))
