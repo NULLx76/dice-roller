@@ -14,26 +14,22 @@ except NotImplementedError:
 argument_string = ''.join(sys.argv[1:])
 args = argument_string.split("d")
 
+roll = 0
+
 times = int(args[0])
 
 if any('+' in s for s in args):
     args = re.split("[d+]", argument_string)
-    print(args)
-
     sides = int(args[1])
     operation = int(args[2])
 elif any('-' in s for s in args):
     args = re.split("[d-]", argument_string)
-    print(args)
-    times = int(args[0])
     sides = int(args[1])
     operation = - int(args[2])
 else:
-    times = int(args[0])
     sides = int(args[1])
     operation = 0
 
-roll = 0
 while times > 0:
     roll += random.randrange(1, sides)
     times -= 1
