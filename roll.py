@@ -11,30 +11,44 @@ except NotImplementedError:
     warnings.warn("A secure pseudo-random number generator is not available "
                   "on your system. Falling back to Mersenne Twister.")
 
-argument_string = ''.join(sys.argv[1:])
-args = argument_string.split("d")
 
-roll = 0
+def roll_dice(args_list):
+    if not isinstance(args_list, str):
+        args_string = ''.join(args_list)
+    else:
+        args_string = args_list
 
-times = int(args[0])
+    args = args_string.split("d")
 
-if any('+' in s for s in args):
-    args = re.split("[d+]", argument_string)
-    sides = int(args[1])
-    operation = int(args[2])
-elif any('-' in s for s in args):
-    args = re.split("[d-]", argument_string)
-    sides = int(args[1])
-    operation = - int(args[2])
-else:
-    sides = int(args[1])
-    operation = 0
+    t_roll = 0
+    roll = 0
+    rolls = []
 
-while times > 0:
-    roll += random.randrange(1, sides)
-    times -= 1
+    times = int(args[0])
 
-print("total roll: " + str(roll))
-output = roll + operation
+    if any('+' in s for s in args):
+        args = re.split("[d+]", args_string)
+        sides = int(args[1])
+        operation = int(args[2])
+    elif any('-' in s for s in args):
+        args = re.split("[d-]", args_string)
+        sides = int(args[1])
+        operation = - int(args[2])
+    else:
+        sides = int(args[1])
+        operation = 0
 
-print(output)
+    while times > 0:
+        t_roll += random.randrange(1, sides)
+        roll += t_roll
+        rolls.append(t_roll)
+        times -= 1
+
+    output = roll + operation
+
+    return output, rolls
+
+
+rolling = roll_dice(sys.argv[1:])
+print("Total: " + str(rolling[0]) + "\nRolls: " + str(rolling[1]))
+
