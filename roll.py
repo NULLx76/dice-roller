@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# coding: utf-8
 import sys
 import re
 import random
@@ -20,12 +21,13 @@ def roll_dice(args_list):
 
     args = args_string.split("d")
 
-    t_roll = 0
-    roll = 0
-    rolls = []
+    # Without times specified treat it is one
+    if args[0] is not '':
+        times = int(args[0])
+    else:
+        times = 1
 
-    times = int(args[0])
-
+    # Support for adding or subtracting by suffixing minus or plus (i.e. 4d6+12)
     if any('+' in s for s in args):
         args = re.split("[d+]", args_string)
         sides = int(args[1])
@@ -38,17 +40,20 @@ def roll_dice(args_list):
         sides = int(args[1])
         operation = 0
 
-    while times > 0:
-        t_roll += random.randrange(1, sides)
+    # rolling the dice and keeping track of the rolls
+    roll = 0
+    rolls = []
+    for n in range(times):
+        t_roll = random.randrange(1, sides)
         roll += t_roll
         rolls.append(t_roll)
-        times -= 1
 
+    # Add any operation (+ or -)
     output = roll + operation
 
+    # Returns total and individual rolls
     return output, rolls
 
 
 rolling = roll_dice(sys.argv[1:])
 print("Total: " + str(rolling[0]) + "\nRolls: " + str(rolling[1]))
-
