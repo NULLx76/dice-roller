@@ -21,7 +21,7 @@ def roll_dice(args_list):
 
     args = args_string.split("d")
 
-    # Without times specified treat it is one
+    # Without times specified treat it as one
     if args[0] is not '':
         times = int(args[0])
     else:
