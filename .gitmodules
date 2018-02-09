@@ -1,3 +1,0 @@
-[submodule "AUR"]
-	path = AUR
-	url = ssh://aur@aur.archlinux.org/dice-roller-git.git
