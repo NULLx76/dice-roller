@@ -55,7 +55,6 @@ input_string = ''.join(input_list)           # Push everything together in a str
 # Run the function
 run_dice_roller = dice_roller(input_string)
 
-
 # Print the results
 print("Total: " + str(run_dice_roller[0]))
 print("Rolls: " + str(run_dice_roller[1]))
