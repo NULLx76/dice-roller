@@ -6,6 +6,11 @@ A python dice rolling application using standard [dice notation](https://en.wiki
 roll <dice code>
 ```
 
+Example:
+
+
+![example](https://i.imgur.com/KKlSb49.png)
+
 ## Installation
 
 ### Archlinux
@@ -14,16 +19,14 @@ For Archlinux there is an [AUR package](https://aur.archlinux.org/packages/dice-
 You can install the PKGBUILD manually or install with the help of your favourite AUR Helper.
 
 #### AUR Helper
-*Using pacaur as an example*
+*Using trizen as an example*
 
 ```
-$ pacaur -S dice-roller-git
+$ trizen -S dice-roller-git
 ```
 
 #### Manual
 For manual installation of AUR packages please see to the [ArchWiki](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages)
-
---------
 
 ### Other Linux
 #### Prerequisites
