@@ -40,16 +40,21 @@ def dice_roller(input_text):
     return output, rolls
 
 
-# If no arguments are given
-if len(sys.argv) is 1:
+def error():
     print('Syntax is: roll <dice_code>')
     sys.exit(2)
+
+
+# If no arguments are given
+if len(sys.argv) is 1:
+    error()
 
 input_list = sys.argv[1:]                    # Command line input (is a list)
 input_string = ''.join(input_list)           # Push everything together in a string
 
 # Run the function
 run_dice_roller = dice_roller(input_string)
+
 
 # Print the results
 print("Total: " + str(run_dice_roller[0]))
