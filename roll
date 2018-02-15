@@ -13,54 +13,44 @@ except NotImplementedError:
                   "on your system. Falling back to Mersenne Twister.")
 
 
-def roll_dice(args_list):
-    if not isinstance(args_list, str):
-        args_string = ''.join(args_list)
-    else:
-        args_string = args_list
+# Takes in a string with dice and returns the rolled dice and the sum
+def dice_roller(input_text):
+    # Definitions
+    r_dice = re.compile('\d*d\d+')               # Regex for detecting dice notation
+    rolls = []                                   # List of the rolls (2D list)
 
-    args = args_string.split("d")
+    # dice rolling code
+    def roll_dice(d):
+        result = 0
+        dice = d.group(0)
+        dice_split = dice.split("d")
+        times = 1 if dice_split is '' else int(dice_split[0])
+        sides = int(dice_split[1])
 
-    # Without times specified treat it as one
-    if args[0] is not '':
-        times = int(args[0])
-    else:
-        times = 1
+        for t in range(times):
+            roll = random.randrange(1, sides+1)
+            rolls.append(str(roll) + "/" + str(sides))
+            result += roll
 
-    # Support for adding or subtracting by suffixing minus or plus (i.e. 4d6+12)
-    if any('+' in s for s in args):
-        args = re.split("[d+]", args_string)
-        sides = int(args[1])
-        operation = int(args[2])
-    elif any('-' in s for s in args):
-        args = re.split("[d-]", args_string)
-        sides = int(args[1])
-        operation = - int(args[2])
-    else:
-        sides = int(args[1])
-        operation = 0
-    
-    if sides <=1:
-        print("Sides of the die must be greater than 1")
-        sys.exit(2)
+        return str(result)
 
-    # rolling the dice and keeping track of the rolls
-    roll = 0
-    rolls = []
-    for n in range(times):
-        t_roll = random.randrange(1, sides+1)
-        roll += t_roll
-        rolls.append(t_roll)
+    # Regex the input and automatically run the dice rolling code when dice notation is detected
+    output = eval(r_dice.sub(roll_dice, input_text))
 
-    # Add any operation (+ or -)
-    output = roll + operation
-
-    # Returns total and individual rolls
     return output, rolls
 
+
+# If no arguments are given
 if len(sys.argv) is 1:
     print('Syntax is: roll <dice_code>')
     sys.exit(2)
 
-rolling = roll_dice(sys.argv[1:])
-print("Total: " + str(rolling[0]) + "\nRolls: " + str(rolling[1]))
+input_list = sys.argv[1:]                    # Command line input (is a list)
+input_string = ''.join(input_list)           # Push everything together in a string
+
+# Run the function
+run_dice_roller = dice_roller(input_string)
+
+# Print the results
+print("Total: " + str(run_dice_roller[0]))
+print("Rolls: " + str(run_dice_roller[1]))
