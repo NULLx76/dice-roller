@@ -17,7 +17,7 @@ except NotImplementedError:
 def dice_roller(input_text):
     # Definitions
     r_dice = re.compile('\d*d\d+')               # Regex for detecting dice notation
-    rolls = []                                   # List of the rolls (2D list)
+    rolls = []                                   # List of the rolls
 
     # dice rolling code
     def roll_dice(d):
