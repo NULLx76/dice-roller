@@ -61,17 +61,23 @@ if "-h" in input_string.lower():
     info()
     sys.exit(0)
 
-# Execute the function and handle errors
-run_dice_roller = []
-try:
-    run_dice_roller = dice_roller(input_string)
-except (SyntaxError, NameError):
-    error()
-except ZeroDivisionError:
-    print("You can not divide by zero")
-    sys.exit(2)
+
+# Main function
+def main():
+    # Execute the function and handle errors
+    run_dice_roller = []
+    try:
+        run_dice_roller = dice_roller(input_string)
+    except (SyntaxError, NameError):
+        error()
+    except ZeroDivisionError:
+        print("You can not divide by zero")
+        sys.exit(2)
+
+    # Print the results
+    print("Total: " + str(run_dice_roller[0]))
+    print("Rolls: " + str(run_dice_roller[1]))
 
 
-# Print the results
-print("Total: " + str(run_dice_roller[0]))
-print("Rolls: " + str(run_dice_roller[1]))
+if __name__ == "__main__":
+    main()
