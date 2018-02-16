@@ -10,23 +10,27 @@ try:
 except NotImplementedError:
     import warnings
     warnings.warn("A secure pseudo-random number generator is not available "
-                  "on your system. Falling back to Mersenne Twister.")
+                  "on your system. Falling back to Mersenne Twister.")  # Mersenne twister is the default Python PRNG
 
 
 # Takes in a string with dice and returns the rolled dice and the sum
 def dice_roller(input_text):
-    # Definitions
+    # Function Variables
     r_dice = re.compile('\d*d\d+')               # Regex for detecting dice notation
-    rolls = []                                   # List of the rolls
+    rolls = []                                   # List for keeping track of the rolls
 
     # dice rolling code
     def roll_dice(d):
         result = 0
-        dice = d.group(0)
+        dice = d.group(0)                        # Zeroth group of regex match is the match itself
+
+        # Split the string at the letter d
         dice_split = dice.split("d")
-        times = int(dice_split[0]) if dice_split[0] is not '' else 1
+
+        times = int(dice_split[0]) if dice_split[0] is not '' else 1  # reads the number of rolls, falls back to one
         sides = int(dice_split[1])
 
+        # Actually rolling the dice
         for t in range(times):
             roll = random.randrange(1, sides+1)
             rolls.append(str(roll) + "/" + str(sides))
@@ -34,7 +38,7 @@ def dice_roller(input_text):
 
         return str(result)
 
-    # Regex the input and automatically run the dice rolling code when dice notation is detected
+    # Regex the input and automatically run the dice rolling code when dice notation is detected and evaluate the output
     output = eval(r_dice.sub(roll_dice, input_text))
 
     return output, rolls
