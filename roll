@@ -40,8 +40,12 @@ def dice_roller(input_text):
     return output, rolls
 
 
+def info():
+    print('Syntax is: roll <dice_code> \nExample: 2d8 + 6 + d8')
+
+
 def error():
-    print('Syntax is: roll <dice_code>')
+    info()
     sys.exit(2)
 
 
@@ -52,8 +56,21 @@ if len(sys.argv) is 1:
 input_list = sys.argv[1:]                    # Command line input (is a list)
 input_string = ''.join(input_list)           # Push everything together in a string
 
-# Run the function
-run_dice_roller = dice_roller(input_string)
+
+if "-h" in input_string.lower():
+    info()
+    sys.exit(0)
+
+# Execute the function and handle errors
+run_dice_roller = []
+try:
+    run_dice_roller = dice_roller(input_string)
+except (SyntaxError, NameError):
+    error()
+except ZeroDivisionError:
+    print("You can not divide by zero")
+    sys.exit(2)
+
 
 # Print the results
 print("Total: " + str(run_dice_roller[0]))
