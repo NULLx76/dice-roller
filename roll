@@ -10,80 +10,57 @@ try:
 except NotImplementedError:
     import warnings
     warnings.warn("A secure pseudo-random number generator is not available "
-                  "on your system. Falling back to Mersenne Twister.")  # Mersenne twister is the default Python PRNG
+                  "on your system. Falling back to Mersenne Twister.")
 
 
-# Takes in a string with dice and returns the rolled dice and the sum
-def dice_roller(input_text):
-    # Function Variables
-    r_dice = re.compile('\d*d\d+')               # Regex for detecting dice notation
-    rolls = []                                   # List for keeping track of the rolls
+def roll_dice(args_list):
+    if not isinstance(args_list, str):
+        args_string = ''.join(args_list)
+    else:
+        args_string = args_list
 
-    # dice rolling code
-    def roll_dice(d):
-        result = 0
-        dice = d.group(0)                        # Zeroth group of regex match is the match itself
+    args = args_string.split("d")
 
-        # Split the string at the letter d
-        dice_split = dice.split("d")
+    # Without times specified treat it as one
+    if args[0] is not '':
+        times = int(args[0])
+    else:
+        times = 1
 
-        times = int(dice_split[0]) if dice_split[0] is not '' else 1  # reads the number of rolls, falls back to one
-        sides = int(dice_split[1])
-
-        # Actually rolling the dice
-        for t in range(times):
-            roll = random.randrange(1, sides+1)
-            rolls.append(str(roll) + "/" + str(sides))
-            result += roll
-
-        return str(result)
-
-    # Regex the input and automatically run the dice rolling code when dice notation is detected and evaluate the output
-    output = eval(r_dice.sub(roll_dice, input_text))
-
-    return output, rolls
-
-
-# Prints helpful information (Its own function for easier expansion later)
-def info():
-    print('Syntax is: roll <dice_code> \nExample: 2d8 + 6 + d8')
-
-
-# Gets called whenever an error occurs
-def error():
-    info()
-    sys.exit(2)
-
-
-# Main function
-def main():
-    # If no arguments are given
-    if len(sys.argv) is 1:
-        error()
-
-    # Commandline input handling
-    input_list = sys.argv[1:]                    # Command line input (is a list)
-    input_string = ''.join(input_list)           # Push everything together in a string
-
-    # Check if help flag i is passed
-    if "-h" in input_string.lower():
-        info()
-        sys.exit(0)
-
-    # Execute the function and handle errors
-    run_dice_roller = []
-    try:
-        run_dice_roller = dice_roller(input_string)
-    except (SyntaxError, NameError):
-        error()
-    except ZeroDivisionError:
-        print("You can not divide by zero")
+    # Support for adding or subtracting by suffixing minus or plus (i.e. 4d6+12)
+    if any('+' in s for s in args):
+        args = re.split("[d+]", args_string)
+        sides = int(args[1])
+        operation = int(args[2])
+    elif any('-' in s for s in args):
+        args = re.split("[d-]", args_string)
+        sides = int(args[1])
+        operation = - int(args[2])
+    else:
+        sides = int(args[1])
+        operation = 0
+    
+    if sides <=1:
+        print("Sides of the die must be greater than 1")
         sys.exit(2)
 
-    # Print the results
-    print("Total: " + str(run_dice_roller[0]))
-    print("Rolls: " + str(run_dice_roller[1]))
+    # rolling the dice and keeping track of the rolls
+    roll = 0
+    rolls = []
+    for n in range(times):
+        t_roll = random.randrange(1, sides+1)
+        roll += t_roll
+        rolls.append(t_roll)
 
+    # Add any operation (+ or -)
+    output = roll + operation
 
-if __name__ == "__main__":
-    main()
+    # Returns total and individual rolls
+    return output, rolls
+
+if len(sys.argv) is 1:
+    print('Syntax is: roll <dice_code>')
+    sys.exit(2)
+
+rolling = roll_dice(sys.argv[1:])
+print("Total: " + str(rolling[0]) + "\nRolls: " + str(rolling[1]))

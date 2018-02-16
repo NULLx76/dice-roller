@@ -1,3 +1,8 @@
+# OLD VERSION DO NOT USE
+# ONLY AVAILABLE FOR ARCHIVAL PURPOSES
+
+--------
+
 # Dice-Roller
 A python dice rolling application using standard [dice notation](https://en.wikipedia.org/wiki/Dice_notation)
 
