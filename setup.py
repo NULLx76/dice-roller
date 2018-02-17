@@ -8,12 +8,12 @@ except(IOError, ImportError):
 
 setup(
     name='Dice-Roller',
-    version='1.3.1',
+    version='1.4',
     license='GPL3',
     author = 'Victor Roest',
     author_email = 'victor@xirion.net',
     url = 'https://git.xirion.net/victor/dice-roller',
-    download_url = 'https://git.xirion.net/victor/dice-roller/archive/v1.3.1.tar.gz',
+    download_url = 'https://git.xirion.net/victor/dice-roller/archive/v1.4.tar.gz',
     keywords = ['dnd', 'dice'],
     description= 'A dice-rolling application using standard dice notation',
     long_description=long_description,
