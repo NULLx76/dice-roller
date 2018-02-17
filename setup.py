@@ -1,4 +1,5 @@
-from distutils.core import setup
+#from distutils.core import setup
+from setuptools import setup
 
 try:
     import pypandoc
@@ -8,12 +9,12 @@ except Exception:
 
 setup(
     name='Dice-Roller',
-    version='1.5',
+    version='1.6',
     license='GPL3',
     author = 'Victor Roest',
     author_email = 'victor@xirion.net',
     url = 'https://git.xirion.net/victor/dice-roller',
-    download_url = 'https://git.xirion.net/victor/dice-roller/archive/v1.5.tar.gz',
+    download_url = 'https://git.xirion.net/victor/dice-roller/archive/v1.6.tar.gz',
     keywords = ['dnd', 'dice'],
     description= 'A dice-rolling application using standard dice notation',
     long_description=long_description,
