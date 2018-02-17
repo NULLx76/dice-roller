@@ -13,30 +13,40 @@ Example:
 
 ## Installation
 
-### Archlinux
+### Pip install
 
-For Archlinux there is an [AUR package](https://aur.archlinux.org/packages/dice-roller-git/) available. 
-You can install the PKGBUILD manually or install with the help of your favourite AUR Helper.
+**System-wide install (*`sudo`*)**
 
-#### AUR Helper
-*Using trizen as an example*
-
-```
-$ trizen -S dice-roller-git
+```sh
+pip install dice-roller
 ```
 
-#### Manual
-For manual installation of AUR packages please see to the [ArchWiki](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages)
+**User install (*No `sudo`*)**
 
-### Other Linux
-#### Prerequisites
-* Git
-* Python 3
+```sh
+pip install --user dice-roller
 
-#### Installation
+# Add local 'pip' to PATH:
+# (In your .bashrc, .zshrc etc)
+export PATH="${PATH}:${HOME}/.local/bin/"
 ```
-$ git clone https://git.xirion.net/victor/dice-roller.git
-$ cd dice-roller
-$ sudo python setup.py install
 
+
+### Manual/Git install
+
+```sh
+git clone https://git.xirion.net/victor/dice-roller/
+cd dice-roller
+pip3 install --user .
+
+# Add local 'pip' to PATH:
+# (In your .bashrc, .zshrc etc)
+export PATH="${PATH}:${HOME}/.local/bin/"
 ```
+
+
+### OS/Distro Packages
+
+#### Arch Linux
+
+`dice-roller` is available on the AUR as `dice-roller-git`.
