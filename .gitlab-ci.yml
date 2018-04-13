@@ -1,0 +1,23 @@
+image: python:latest
+
+before_script:
+  - python -V                                   # Print out python version for debugging
+  - pip install twine pypandoc                  # Install Twine and pypandoc for uploading
+
+run:
+  script:
+  - python setup.py bdist_wheel --universal     # Build
+  - pip install dist/*                          # Install
+  - roll 2d8                                    # run
+  artifacts:
+    paths:
+    - dist/*.whl
+  
+upload:
+  script:
+  - apt-get -qq update && apt-get install -y pandoc
+  - pip install twine pypandoc
+  - python setup.py bdist_wheel --universal     # Build
+  - twine upload dist/*                         # Upload to pypi
+  only:
+  - tags
