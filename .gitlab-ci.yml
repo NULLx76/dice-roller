@@ -15,7 +15,7 @@ run:
   
 upload:
   script:
-  - apt-get install -y pandoc
+  - apt-get -qq update && apt-get install -y pandoc
   - pip install twine pypandoc
   - python setup.py bdist_wheel --universal     # Build
   - twine upload dist/*                         # Upload to pypi
