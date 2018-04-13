@@ -1,24 +1,21 @@
-# This file is a template, and might need editing before it works on your project.
-# This file is a template, and might need editing before it works on your project.
 image: python:latest
 
 before_script:
   - python -V                                   # Print out python version for debugging
+  - pip install twine                           # Install Twine for uploading
 
 run:
   script:
-  - python setup.py bdist_wheel --universal
-  # an alternative approach is to install and run:
-  - pip install dist/*
-  # run the command here
-  - roll 2d8
+  - python setup.py bdist_wheel --universal     # Build
+  - pip install dist/*                          # Install
+  - roll 2d8                                    # run
   artifacts:
     paths:
     - dist/*.whl
   
 upload:
   script:
-  - python setup.py bdist_wheel --universal
-  - twine upload dist/*
+  - python setup.py bdist_wheel --universal     # Build
+  - twine upload dist/*                         # Upload to pypi
   only:
   - tags
