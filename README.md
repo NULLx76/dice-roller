@@ -1,5 +1,5 @@
 # Dice-Roller
-A python dice rolling application using standard [dice notation](https://en.wikipedia.org/wiki/Dice_notation)
+A python dice rolling application using standard [dice notation](https://en.wikipedia.org/wiki/Dice_notation).
 
 ## Usage
 ```
