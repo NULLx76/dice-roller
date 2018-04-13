@@ -2,7 +2,6 @@ image: python:latest
 
 before_script:
   - python -V                                   # Print out python version for debugging
-  - pip install twine pypandoc                  # Install Twine and pypandoc for uploading
 
 run:
   script:
@@ -15,8 +14,7 @@ run:
   
 upload:
   script:
-  - apt-get -qq update && apt-get install -y pandoc
-  - pip install twine pypandoc
+  - pip install twine
   - python setup.py bdist_wheel --universal     # Build
   - twine upload dist/*                         # Upload to pypi
   only:
