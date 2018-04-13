@@ -24,13 +24,13 @@ Installation
 Pip install
 ~~~~~~~~~~~
 
-**System-wide install (*``sudo``*)**
+**System-wide install** *(sudo)*
 
 .. code:: sh
 
     pip install dice-roller
 
-**User install (*No ``sudo``*)**
+**User install** *(no sudo)*
 
 .. code:: sh
 
