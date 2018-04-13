@@ -16,3 +16,9 @@ run:
     paths:
     - dist/*.whl
   
+upload:
+  script:
+  - python setup.py bdist_wheel --universal
+  - twine upload dist/*
+  only:
+  - tags
