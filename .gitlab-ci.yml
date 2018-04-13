@@ -2,7 +2,7 @@ image: python:latest
 
 before_script:
   - python -V                                   # Print out python version for debugging
-  - pip install twine                           # Install Twine for uploading
+  - pip install twine pypandoc                  # Install Twine and pypandoc for uploading
 
 run:
   script:
