@@ -46,7 +46,7 @@ def dice_roller(input_text):
 
 # Prints helpful information (Its own function for easier expansion later)
 def info():
-    print('Syntax is: roll <dice_code> \nExample: 2d8 + 6 + d8')
+    print('Syntax is: roll <dice_code> \nExample: roll 2d8 + 6 + d8')
 
 
 # Gets called whenever an error occurs
