@@ -24,6 +24,13 @@ def stats_roll():
 
     return stat_rolls
 
+# Roll direction
+def dir_roll():
+    dir = ['N','NE','E','SE','S','SW','W','NW','Stay']
+    dir_rolls = str(random.choice(dir))
+
+    return dir_rolls
+
 
 # Takes in a string with dice and returns the rolled dice and the sum
 def dice_roller(input_text):
@@ -76,9 +83,14 @@ def main():
     # Commandline input handling
     input_list = sys.argv[1:]                    # Command line input (is a list)
     input_string = ''.join(input_list)           # Push everything together in a string
-    
+
     if 'stats' in input_string.lower():
         print(stats_roll())
+        sys.exit(0)
+
+    # Directionroll
+    if 'dir' in input_string.lower():
+        print(dir_roll())
         sys.exit(0)
 
     # Check if help flag i is passed
