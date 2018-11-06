@@ -11,12 +11,13 @@ Usage
 
     roll <dice code>
 
+
 Example:
 
 .. figure:: https://i.imgur.com/KKlSb49.png
    :alt: example
 
-   example
+Instead of a dice code you can also put "stats" or "dir" for a stats roll or direction roll respectively.
 
 Installation
 ------------
