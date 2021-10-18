@@ -1,5 +1,10 @@
-Dice-Roller
+Deprecation Notice
 ===========
+`Roll-rs <https://github.com/finitum/roll-rs>`_ has superseded this project and thus this project will not receive any updates.
+Any features requests are kindly to be redirected to the aforementioned roll-rs.
+
+Dice-Roller
+-----
 
 A python dice rolling application using standard `dice
 notation <https://en.wikipedia.org/wiki/Dice_notation>`__
